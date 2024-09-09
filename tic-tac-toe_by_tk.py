@@ -17,8 +17,8 @@ class TicTacToe:
         for i in range(3):
             for j in range(3):
                 button = tk.Button(self.frame, text='', font=('Arial', 24, 'bold'), width=3, height=1,
-                                   command=lambda row=i, col=j: self.make_move(row, col),
-                                   bg='#FFFFFF', activebackground='#E0E0E0', relief=tk.RAISED, borderwidth=3)
+                                command=lambda row=i, col=j: self.make_move(row, col),
+                                bg='#FFFFFF', activebackground='#E0E0E0', relief=tk.RAISED, borderwidth=3)
                 button.grid(row=i, column=j, padx=5, pady=5)
                 self.buttons.append(button)
 
@@ -26,7 +26,7 @@ class TicTacToe:
         self.status_label.pack(pady=10)
 
         self.reset_button = tk.Button(master, text="New Game", font=('Arial', 12), command=self.reset_game,
-                                      bg='#4CAF50', fg='white', activebackground='#45a049')
+                                    bg='#4CAF50', fg='white', activebackground='#45a049')
         self.reset_button.pack(pady=10)
 
     def make_move(self, row, col):
@@ -66,7 +66,7 @@ class TicTacToe:
     def get_best_move(self):
         available_moves = [i for i in range(9) if self.board[i] == '']
         
-        # Check if computer can win in the next move
+        #  if computer can win in the next move
         for move in available_moves:
             self.board[move] = 'O'
             if self.check_winner():
@@ -74,7 +74,7 @@ class TicTacToe:
                 return move
             self.board[move] = ''
         
-        # Check if player can win in the next move and block it
+        # if player can win in the next move and block it
         for move in available_moves:
             self.board[move] = 'X'
             if self.check_winner():
@@ -82,17 +82,17 @@ class TicTacToe:
                 return move
             self.board[move] = ''
         
-        # Choose center if available
+        # for center if available
         if 4 in available_moves:
             return 4
         
-        # Choose a corner
+        # for a corner
         corners = [0, 2, 6, 8]
         available_corners = [move for move in corners if move in available_moves]
         if available_corners:
             return random.choice(available_corners)
         
-        # Choose a random move
+        # for random move
         return random.choice(available_moves)
 
     def check_winner(self):
